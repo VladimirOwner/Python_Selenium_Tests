@@ -85,4 +85,4 @@ class DNSPage(BasePage):
 
     def click_on_confirm_delete(self):
         with allure.step('В модальном окне подтвердить удаление объекта (нажать на кнопку "Удалить")'):
-            self.wait(self.driver).until(EC.visibility_of_element_located(self.CONFIRM_DELETE)).click()
+             self.wait(self.driver).until(EC.visibility_of_element_located(self.CONFIRM_DELETE)).click()
