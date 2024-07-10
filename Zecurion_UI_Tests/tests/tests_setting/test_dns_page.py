@@ -15,13 +15,14 @@ def test_create_dns(driver):
     dns_page.click_on_setting_button()
     dns_page.click_on_dns_servers_part()
     dns_page.click_on_add_button()
+    count = dns_page.get_count_object_dns()
     dns_page.dns_server_field().send_keys('192.168.0.122')
     dns_page.click_on_add_dns_server()
     dns_page.dns_server_field_second().send_keys('192.168.0.10')
     dns_page.click_on_save_button()
     dns_page.objects_in_main_frame()
     with allure.step('Проверка создания объекта dns-сервера'):
-        assert dns_page.get_count_object_dns() == 2 , 'Неверное количество объектов DNS-серверов'
+        assert dns_page.get_count_object_dns() == count+1 , 'Неверное количество объектов DNS-серверов'
 
 @allure.feature("Настройки")
 @allure.story("DNS-серверы")
@@ -65,9 +66,10 @@ def test_delete_dns(driver):
     login_page.login()
     dns_page.click_on_setting_button()
     dns_page.click_on_dns_servers_part()
+    count = dns_page.get_count_object_dns()
     with allure.step('В основном фрейме выбрать объект dns-cервера'):
         dns_page.objects_in_main_frame().click()
     dns_page.click_on_delete_button()
     dns_page.click_on_confirm_delete()
     with allure.step('Проверка удаления объекта dns-сервера'):
-        assert dns_page.get_count_object_dns() == 1 , 'Неверное количество объектов DNS-серверов'
+        assert dns_page.get_count_object_dns() == count-1 , 'Неверное количество объектов DNS-серверов'
