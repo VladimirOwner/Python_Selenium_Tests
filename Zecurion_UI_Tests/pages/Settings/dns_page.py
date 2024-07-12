@@ -23,7 +23,8 @@ class DNSPage(BasePage):
     STATISTIC_INFORMATION = ('xpath', '//span[text()=\'Создано\']/../span[@class=\'b-frame-detail__stats-value d-flex\']/span')
     DELETE_BUTTON = ('xpath','//i[@class=\'b-frame-detail__footer-delete far fa-trash-alt\']')
     CONFIRM_DELETE = ('xpath', '//button[@class=\'btn b-modal__button b-button_primary btn-no-variant b-button btn-no-variant\']')
-
+    ERROR_MODAL_TEXT = ('xpath', '//span[text()=\'Адрес DNS-сервера - обязательно для заполнения\']')
+    OBLIGATORY_TO_FILL_FIELD = ('xpath','//div[@class=\'input-group\']//div[text()=\'обязательно для заполнения\']')
 
     def click_on_setting_button(self):
         with allure.step('Нажать на кнопку "Настройки"'):
@@ -86,3 +87,11 @@ class DNSPage(BasePage):
     def click_on_confirm_delete(self):
         with allure.step('В модальном окне подтвердить удаление объекта (нажать на кнопку "Удалить")'):
              self.wait(self.driver).until(EC.visibility_of_element_located(self.CONFIRM_DELETE)).click()
+
+    def get_error_modal_text(self):
+        text = self.wait(self.driver).until(EC.visibility_of_element_located(self.ERROR_MODAL_TEXT))
+        return text.text
+
+    def get_obligatory_to_fill_text(self):
+        text = self.wait(self.driver).until(EC.visibility_of_element_located(self.OBLIGATORY_TO_FILL_FIELD))
+        return text.text

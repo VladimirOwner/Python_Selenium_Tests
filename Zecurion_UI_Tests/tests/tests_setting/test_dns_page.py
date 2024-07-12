@@ -73,3 +73,30 @@ def test_delete_dns(driver):
     dns_page.click_on_confirm_delete()
     with allure.step('Проверка удаления объекта dns-сервера'):
         assert dns_page.get_count_object_dns() == count-1 , 'Неверное количество объектов DNS-серверов'
+
+@allure.feature("Настройки")
+@allure.story("DNS-серверы")
+@allure.title('Создание объекта DNS-сервера без заполнения обязательного поля адреса DNS')
+def test_create_without_obligatory_fill(driver):
+    login_page = LoginPage(driver)
+    dns_page = DNSPage(driver)
+    login_page.login()
+    dns_page.click_on_setting_button()
+    dns_page.click_on_dns_servers_part()
+    dns_page.click_on_add_button()
+    dns_page.click_on_save_button()
+    with allure.step('Проверка появления модального окна с текстом об обязательности заполнения поля адреса DNS'):
+        assert dns_page.get_error_modal_text() == 'Адрес DNS-сервера - обязательно для заполнения'
+
+@allure.feature("Настройки")
+@allure.story("DNS-серверы")
+@allure.title('Проверка появления сообщения об обязательности заполнения поля адреса DNS')
+def test_check_text_obligatory_to_fill(driver):
+    login_page = LoginPage(driver)
+    dns_page = DNSPage(driver)
+    login_page.login()
+    dns_page.click_on_setting_button()
+    dns_page.click_on_dns_servers_part()
+    dns_page.click_on_add_button()
+    with allure.step('Проверка появления сообщения об обязательности заполнения поля адреса DNS'):
+        assert dns_page.get_obligatory_to_fill_text() == 'обязательно для заполнения'
