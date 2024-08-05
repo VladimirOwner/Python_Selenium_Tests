@@ -9,3 +9,4 @@ class WebsitesPage(BasePage):
     PROTOCOL_BUTTON = ('xpath', '//span[@class=\'b-left-frame-tree__title-name b-left-frame-tree__title-name_single\']//span[text()=\'Протоколы\']')
     ADD_NEW_PROTOCOL = ('xpath', '//div[@class=\'b-frame-main__buttons\']//button[@type=\'button\']')
     SAVE_BUTTON = ('xpath', '//div[@class=\'b-frame-detail__footer-buttons\']/button[@type=\'button\']/span[text()=\' Сохранить \']')
+8
