@@ -12,6 +12,7 @@ class WebsitesPage(BasePage):
     ADD_BUTTON = ('xpath', '//button[@class=\'btn btn-no-variant b-button btn-no-variant\']/i')
     PENCIL_BUTTON = ('xpath', '//span[@class=\'c-pencil-edit__icon\']')
     INPUT_PENCIL_FIELD = ('xpath', '//div[@class=\'b-form-group form-group required-field c-pencil-edit__input vf-field-dirty vf-field-valid vf-field-touched\']')
+    GET_NAME_OBJECT = ('xpath', '//div[@class=\'ag-center-cols-container\']/div[last()]/div[1]//span[@class=\'truncate-block__name\']')
     SAVE_BUTTON = ('xpath', '//button[@type=\'button\']/span[text()=\' Сохранить \']')
     LIST_CATEGORIES_ON_MAIN_FRAME = ('xpath', '//div[@class=\'ag-center-cols-container\']/div')
     IN_CATEGORY_BUTTON = ('xpath', '//button[@type=\'button\']/span[text()=\' В категорию \']')
