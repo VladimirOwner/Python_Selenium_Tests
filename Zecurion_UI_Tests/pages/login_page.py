@@ -15,7 +15,7 @@ class LoginPage(BasePage):
 
     def open(self): # Открытие страницы Zecurion
         with allure.step('Открытие страницы портала'):
-            self.driver.get('http://192.168.0.204:1297/')
+            self.driver.get('http://192.168.1.39:1297/')
 
     def user_field(self): # Получение элемента поля "Пользователь"
         return self.driver.find_element(*self.USER_FIELD)
