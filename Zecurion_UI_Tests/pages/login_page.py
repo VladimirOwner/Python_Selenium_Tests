@@ -6,16 +6,16 @@ class LoginPage(BasePage):
     def __init__(self,driver):
         super().__init__(driver)
 
-    USER_FIELD = ('xpath','//input[@placeholder=\'введите логин\']')
-    PASSWORD_FIELD = ('xpath','//input[@placeholder=\'введите пароль\']')
-    BUTTON = ('xpath','//button[@type=\'button\']')
-    ERROR_MESSEGE = ('xpath','//div[text()=\' Неверный логин или пароль \']')
-    EMPTY_USER_FIELD_TEXT = ('xpath','//div[@class=\'col\']/div[1]/div[text()=\'обязательно для заполнения\']')
-    EMPTY_PASSWORD_FIELD_TEXT = ('xpath','//div[@class=\'col\']/div[2]/div[text()=\'обязательно для заполнения\']')
+    USER_FIELD = ('xpath', '//input[@placeholder=\'введите логин\']')
+    PASSWORD_FIELD = ('xpath', '//input[@placeholder=\'введите пароль\']')
+    BUTTON = ('xpath', '//button[@type=\'button\']')
+    ERROR_MESSEGE = ('xpath', '//div[text()=\' Неверный логин или пароль \']')
+    EMPTY_USER_FIELD_TEXT = ('xpath', '//div[@class=\'col\']/div[1]/div[text()=\'обязательно для заполнения\']')
+    EMPTY_PASSWORD_FIELD_TEXT = ('xpath', '//div[@class=\'col\']/div[2]/div[text()=\'обязательно для заполнения\']')
 
     def open(self): # Открытие страницы Zecurion
         with allure.step('Открытие страницы портала'):
-            self.driver.get('http://192.168.1.39:1297/')
+            self.driver.get('http://192.168.0.204:1297/')
 
     def user_field(self): # Получение элемента поля "Пользователь"
         return self.driver.find_element(*self.USER_FIELD)
