@@ -15,7 +15,7 @@ def test_create_protocol(driver):
     protocols.get_author()
     assert protocols.get_name_protocol() == 'Новый протокол'
 
-def test_edit_protocol(driver):
+def test_change_name_protocol(driver):
     login_page = LoginPage(driver)
     protocols = Protocols(driver)
     login_page.login()
