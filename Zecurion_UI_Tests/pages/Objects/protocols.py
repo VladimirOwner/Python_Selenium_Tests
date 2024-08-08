@@ -48,6 +48,7 @@ class Protocols(BasePage):
     def get_name_protocol(self):
         text = self.wait(self.driver).until(EC.visibility_of_element_located(self.NAME_PROTOCOL))
         return text.text
+
     def click_name_protocol(self):
         self.wait(self.driver).until(EC.visibility_of_element_located(self.NAME_PROTOCOL)).click()
 
