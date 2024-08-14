@@ -15,10 +15,15 @@ class LoginPage(BasePage):
 
     def open(self): # Открытие страницы Zecurion
         with allure.step('Открытие страницы портала'):
-            self.driver.get('http://192.168.1.39:1297/')
+            with open('creds.txt', 'r') as f:
+                for line in f:
+                    if line.__contains__('NGFW_STAND'):
+                        url = line.split('=')
+                        url = url[1]
+                self.driver.get(url)
 
     def user_field(self): # Получение элемента поля "Пользователь"
-        return self.driver.find_element(*self.USER_FIELD)
+        return self.wait(self.driver).until(EC.visibility_of_element_located(self.USER_FIELD))
 
 
     def password_field(self): # Получение элемента поля "Пароль"
