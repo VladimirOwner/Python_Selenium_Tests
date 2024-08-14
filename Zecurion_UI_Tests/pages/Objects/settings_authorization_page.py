@@ -78,10 +78,12 @@ class AuthorizationPage(BasePage):
             self.wait(self.driver).until(EC.visibility_of_element_located(self.OBJECT_BUTTON)).click()
 
     def click_on_authorization_button(self):
-        self.wait(self.driver).until(EC.visibility_of_element_located(self.AUTHORIZATION_BUTTON)).click()
+        with allure.step('В левом фрейме нажать на раздел "Параметры авторизации"'):
+            self.wait(self.driver).until(EC.visibility_of_element_located(self.AUTHORIZATION_BUTTON)).click()
 
     def click_on_add_button(self):
-        self.wait(self.driver).until(EC.visibility_of_element_located(self.ADD_BUTTON)).click()
+        with allure.step('В основном фрейме нажать снизу на кнопку "Добавить"'):
+            self.wait(self.driver).until(EC.visibility_of_element_located(self.ADD_BUTTON)).click()
 
     def input_url_ldap(self):
         return self.wait(self.driver).until(EC.visibility_of_element_located(self.INPUT_URL_LDAP))
@@ -96,16 +98,20 @@ class AuthorizationPage(BasePage):
         return self.wait(self.driver).until(EC.visibility_of_element_located(self.INPUT_PASSWORD))
 
     def click_on_save_button(self):
-        self.wait(self.driver).until(EC.visibility_of_element_located(self.SAVE_BUTTON)).click()
+        with allure.step('В правом фрейме нажать на кнопку "Сохранить"'):
+            self.wait(self.driver).until(EC.visibility_of_element_located(self.SAVE_BUTTON)).click()
 
     def click_on_delete_button(self):
-        self.wait(self.driver).until(EC.visibility_of_element_located(self.DELETE_BUTTON)).click()
+        with allure.step('В правом фрейме нажать на кнопку "Удалить"'):
+            self.wait(self.driver).until(EC.visibility_of_element_located(self.DELETE_BUTTON)).click()
 
     def click_on_cancel_button(self):
-        self.wait(self.driver).until(EC.visibility_of_element_located(self.CANCEL_BUTTON)).click()
+        with allure.step('В правом фрейме нажать на кнопку "Отменить"'):
+            self.wait(self.driver).until(EC.visibility_of_element_located(self.CANCEL_BUTTON)).click()
 
     def click_on_checkbox_cash_on_ip(self):
-        self.wait(self.driver).until(EC.visibility_of_element_located(self.CHECK_BOX_USE_CASH_ON_IP)).click()
+        with allure.step('В строке "Использовать кеш по IP" нажать на чек бокс'):
+            self.wait(self.driver).until(EC.visibility_of_element_located(self.CHECK_BOX_USE_CASH_ON_IP)).click()
 
     def get_default_min(self):
         value = self.wait(self.driver).until(EC.visibility_of_element_located(self.INPUT_SESSION_MIN)).get_attribute('value')
@@ -116,10 +122,12 @@ class AuthorizationPage(BasePage):
         return text.text
 
     def choose_object_in_main_frame(self):
-        list = self.wait(self.driver).until(EC.visibility_of_all_elements_located(self.LIST_OBJECT_AUTHORIZATION))
-        return list[-1]
+        with allure.step('В основном фрейме выбрать созданный объект'):
+            list = self.wait(self.driver).until(EC.visibility_of_all_elements_located(self.LIST_OBJECT_AUTHORIZATION))
+            return list[-1]
     def click_on_pencil_button(self):
-        self.wait(self.driver).until(EC.visibility_of_element_located(self.PENCIL_BUTTON)).click()
+        with allure.step('Нажать на кнопку редактирование "Карандаш"'):
+            self.wait(self.driver).until(EC.visibility_of_element_located(self.PENCIL_BUTTON)).click()
 
     def input_pencil_field(self):
         return self.wait(self.driver).until(EC.visibility_of_element_located(self.INPUT_PENCIL_FIELD))
@@ -136,27 +144,32 @@ class AuthorizationPage(BasePage):
         return text.text
 
     def click_on_check_button(self):
-        self.wait(self.driver).until(EC.visibility_of_element_located(self.CHECK_BUTTON)).click()
+        with allure.step('В правом фрейме нажать на кнопку "Проверить"'):
+            self.wait(self.driver).until(EC.visibility_of_element_located(self.CHECK_BUTTON)).click()
 
     def get_fail_text_information(self):
         text = self.wait(self.driver).until(EC.visibility_of_element_located(self.FAILD_TEXT_INFORMATION))
         return text.text
 
     def click_on_type_of_portal_button(self):
-        self.wait(self.driver).until(EC.visibility_of_element_located(self.TYPE_OF_PORTAL_BUTTON)).click()
+        with allure.step('В правом фрейме нажать на кнопку "Выберите вид портала"'):
+            self.wait(self.driver).until(EC.visibility_of_element_located(self.TYPE_OF_PORTAL_BUTTON)).click()
 
     def get_text_header_madal(self):
         text = self.wait(self.driver).until(EC.visibility_of_element_located(self.GET_HEADER_MODAL))
         return text.text
 
     def click_on_statistic_button(self):
-        self.wait(self.driver).until(EC.visibility_of_element_located(self.STATISTIC_BUTTON)).click()
+        with allure.step('В правом фрейме нажать на кнопку "Cтатистика"'):
+            self.wait(self.driver).until(EC.visibility_of_element_located(self.STATISTIC_BUTTON)).click()
 
     def click_on_history_button(self):
-        self.wait(self.driver).until(EC.visibility_of_element_located(self.HISTORY_BUTTON)).click()
+        with allure.step('Нажать на кнопку "дата" под строкой "История изменений"'):
+            self.wait(self.driver).until(EC.visibility_of_element_located(self.HISTORY_BUTTON)).click()
 
     def click_on_checkbox_reject_repeate_authorization(self):
-        self.wait(self.driver).until(EC.visibility_of_element_located(self.CHECKBOX_REJECT_REAPITE_AUTHORIZATOIN)).click()
+        with allure.step('В правом фрейме нажать на чек бокс "Запрет повторной авторизации"'):
+            self.wait(self.driver).until(EC.visibility_of_element_located(self.CHECKBOX_REJECT_REAPITE_AUTHORIZATOIN)).click()
 
     def get_reject_authorization_on_statistic(self):
         text = self.wait(self.driver).until(EC.visibility_of_element_located(self.CONFIRM_REJECT_AUTHORIZATION_IN_STATISTIC))
@@ -166,7 +179,8 @@ class AuthorizationPage(BasePage):
         return text.text
 
     def click_on_confirm_cancel_button(self):
-        self.wait(self.driver).until(EC.visibility_of_element_located(self.CONFIRM_CANCEL_BUTTON)).click()
+        with allure.step('В модальном окне нажать на кнопку "Отменить изменения"'):
+            self.wait(self.driver).until(EC.visibility_of_element_located(self.CONFIRM_CANCEL_BUTTON)).click()
 
     def get_history_ldap(self):
         text = self.wait(self.driver).until(EC.visibility_of_element_located(self.HISTORY_CHANGING_GET_LDAP))
@@ -193,16 +207,19 @@ class AuthorizationPage(BasePage):
         return text.text
 
     def click_on_confirm_delete_button(self):
-        self.wait(self.driver).until(EC.visibility_of_element_located(self.CONFIRM_DELETE_BUTTON)).click()
+        with allure.step('В модальном окне нажать на кнопку "Удалить"'):
+            self.wait(self.driver).until(EC.visibility_of_element_located(self.CONFIRM_DELETE_BUTTON)).click()
 
     def get_text_information(self):
         text = self.wait(self.driver).until(EC.visibility_of_element_located(self.INFORMATION_MESSAGE))
         return text.text
     def click_on_list_authorization(self):
-        self.wait(self.driver).until(EC.visibility_of_element_located(self.LIST_AUTHORIZATION_BUTTON)).click()
+        with allure.step('В правом фрейме нажать на дроп даун выбора параметра авторизации'):
+            self.wait(self.driver).until(EC.visibility_of_element_located(self.LIST_AUTHORIZATION_BUTTON)).click()
 
     def click_on_basic(self):
-        self.wait(self.driver).until(EC.visibility_of_element_located(self.BASIC_AUTHORIZATION)).click()
+        with allure.step('Из списка параметров авторизации выбрать "Basic"'):
+            self.wait(self.driver).until(EC.visibility_of_element_located(self.BASIC_AUTHORIZATION)).click()
 
     def input_time_session(self):
         return self.wait(self.driver).until(EC.visibility_of_element_located(self.INPUT_TIME_SESSION))
@@ -211,10 +228,12 @@ class AuthorizationPage(BasePage):
         text = self.wait(self.driver).until(EC.visibility_of_element_located(self.TEXT_OBLIGATORY_FILL))
         return text.text
     def click_on_list_source(self):
-        self.wait(self.driver).until(EC.visibility_of_element_located(self.LIST_SOURCE)).click()
+        with allure.step('В правом фрейме нажать на дроп даун выбора "источника"'):
+            self.wait(self.driver).until(EC.visibility_of_element_located(self.LIST_SOURCE)).click()
 
     def click_adress_book_button(self):
-        self.wait(self.driver).until(EC.visibility_of_element_located(self.ADDRESS_BOOK_BUTTON)).click()
+        with allure.step('Из списка источников выбрать "Адресная книга"'):
+            self.wait(self.driver).until(EC.visibility_of_element_located(self.ADDRESS_BOOK_BUTTON)).click()
 
     def get_field_users(self):
         return self.wait(self.driver).until(EC.visibility_of_element_located(self.USERS)).text
@@ -231,7 +250,8 @@ class AuthorizationPage(BasePage):
         return text.text
 
     def click_on_tacacs(self):
-        self.wait(self.driver).until(EC.visibility_of_element_located(self.TACACS_AUTHORIZATION)).click()
+        with allure.step('Из списка параметров авторизации выбрать "TACACS"'):
+            self.wait(self.driver).until(EC.visibility_of_element_located(self.TACACS_AUTHORIZATION)).click()
 
     def input_ip_adress(self):
         return self.wait(self.driver).until(EC.visibility_of_element_located(self.INPUT_IP_ADRESS))
@@ -242,7 +262,8 @@ class AuthorizationPage(BasePage):
         list = self.wait(self.driver).until(EC.visibility_of_all_elements_located(self.LIST_OBLIGATORY_FILL))
         return list
     def click_on_dc_log(self):
-        self.wait(self.driver).until(EC.visibility_of_element_located(self.DC_LOG_AUTHORIZATION)).click()
+        with allure.step('Из списка параметров авторизации выбрать "DC Log"'):
+            self.wait(self.driver).until(EC.visibility_of_element_located(self.DC_LOG_AUTHORIZATION)).click()
 
     def input_port(self):
         return self.wait(self.driver).until(EC.visibility_of_element_located(self.INPUT_PORT))
@@ -284,7 +305,9 @@ class AuthorizationPage(BasePage):
         text = self.wait(self.driver).until(EC.visibility_of_element_located(self.GET_NAME_KEY))
         return text.text
     def click_on_portal(self):
-        self.wait(self.driver).until(EC.visibility_of_element_located(self.PORTAL_AUTHORIZATION)).click()
+        with allure.step('Из списка параметров авторизации выбрать "Портал"'):
+            self.wait(self.driver).until(EC.visibility_of_element_located(self.PORTAL_AUTHORIZATION)).click()
 
     def click_on_radius(self):
-        self.wait(self.driver).until(EC.visibility_of_element_located(self.RADIUS_AUTHORIZATION)).click()
+        with allure.step('Из списка параметров авторизации выбрать "RADIUS"'):
+            self.wait(self.driver).until(EC.visibility_of_element_located(self.RADIUS_AUTHORIZATION)).click()
