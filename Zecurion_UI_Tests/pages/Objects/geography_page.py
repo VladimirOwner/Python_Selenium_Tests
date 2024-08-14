@@ -33,30 +33,37 @@ class GeographyPage(BasePage):
     CHECKBOX_COUNTRY = ('xpath', '//p[text()=\' Алжир \']/../..')
     MODAL_FAST_SEARCH = ('xpath', '//div[@class=\'modal-body__inner-container\']//input[@placeholder=\'Быстрый поиск\']')
     GET_TEXT_COUNTRY = ('xpath', '//p[text()=\' Европа \']/../..')
+    CONFIRM_CANCEL_BUTTON = ('xpath', '//button/span[text()=\' Отменить изменения \']')
     def click_on_object_button(self):
         with allure.step('Нажать на раздел "Объекты"'):
             self.wait(self.driver).until(EC.visibility_of_element_located(self.OBJECT_BUTTON)).click()
 
     def click_on_geography_button(self):
-        self.wait(self.driver).until(EC.visibility_of_element_located(self.GEOGRAPHY_BUTTON)).click()
+        with allure.step('В левом фрейме нажать на раздел "География"'):
+            self.wait(self.driver).until(EC.visibility_of_element_located(self.GEOGRAPHY_BUTTON)).click()
 
     def click_on_add_button(self):
-        self.wait(self.driver).until(EC.visibility_of_element_located(self.ADD_BUTTON)).click()
+        with allure.step('В основном фрейме нажать снизу на кнопку "Добавить"'):
+            self.wait(self.driver).until(EC.visibility_of_element_located(self.ADD_BUTTON)).click()
 
     def click_on_save_button(self):
-        self.wait(self.driver).until(EC.visibility_of_element_located(self.SAVE_BUTTON)).click()
+        with allure.step('В правом фрейме нажать на кнопку "Сохранить"'):
+            self.wait(self.driver).until(EC.visibility_of_element_located(self.SAVE_BUTTON)).click()
 
     def click_on_add_region_button(self):
-        self.wait(self.driver).until(EC.visibility_of_element_located(self.ADD_REGION_BUTTON)).click()
+        with allure.step('В правом фрейме нажать на кнопку "Добавить регион"'):
+            self.wait(self.driver).until(EC.visibility_of_element_located(self.ADD_REGION_BUTTON)).click()
 
     def count_geograpgy_on_main_frame(self):
         count = len(self.wait(self.driver).until(EC.visibility_of_all_elements_located(self.LIST_OBJECT_GEOGRAPHY)))
         return count
     def choose_region(self):
-        self.wait(self.driver).until(EC.visibility_of_element_located(self.ADD_REGION)).click()
+        with allure.step('В модальном окне нажать на чек бокс "Европа"'):
+            self.wait(self.driver).until(EC.visibility_of_element_located(self.ADD_REGION)).click()
 
     def click_save_on_modal(self):
-        self.wait(self.driver).until(EC.visibility_of_element_located(self.SAVE_BUTTON_MODAL)).click()
+        with allure.step('В модальном окне нажать на кнопку "Сохранить"'):
+            self.wait(self.driver).until(EC.visibility_of_element_located(self.SAVE_BUTTON_MODAL)).click()
 
     def count_country_on_rigth_frame(self):
         count = len(self.wait(self.driver).until(EC.visibility_of_all_elements_located(self.LIST_REGIONS)))
@@ -73,23 +80,27 @@ class GeographyPage(BasePage):
         text = self.wait(self.driver).until(EC.visibility_of_element_located(self.GET_DESCRIPTION_ON_MAIN_FRAME))
         return text.text
     def click_on_cancel_button(self):
-        self.wait(self.driver).until(EC.visibility_of_element_located(self.CANCEL_BUTTON)).click()
+        with allure.step('В правом фрейме нажать на кнопку "Отменить"'):
+            self.wait(self.driver).until(EC.visibility_of_element_located(self.CANCEL_BUTTON)).click()
 
     def click_on_pencil_button(self):
-        self.wait(self.driver).until(EC.visibility_of_element_located(self.PENCIL_BUTTON)).click()
+        with allure.step('Нажать на кнопку редактирование "Карандаш"'):
+            self.wait(self.driver).until(EC.visibility_of_element_located(self.PENCIL_BUTTON)).click()
 
     def input_pencil_field(self):
         return self.wait(self.driver).until(EC.visibility_of_element_located(self.INPUT_PENCIL_FIELD))
 
     def click_on_history_button(self):
-        self.wait(self.driver).until(EC.visibility_of_element_located(self.HISTORY_BUTTON)).click()
+        with allure.step('Нажать на кнопку "дата" под строкой "История изменений"'):
+            self.wait(self.driver).until(EC.visibility_of_element_located(self.HISTORY_BUTTON)).click()
 
     def choose_object_in_main_frame(self):
         list = self.wait(self.driver).until(EC.visibility_of_all_elements_located(self.LIST_OBJECT_GEOGRAPHY))
         return list[-1]
 
     def click_on_statistic_button(self):
-        self.wait(self.driver).until(EC.visibility_of_element_located(self.STATISTIC_BUTTON)).click()
+        with allure.step('В правом фрейме нажать на кнопку "Cтатистика"'):
+            self.wait(self.driver).until(EC.visibility_of_element_located(self.STATISTIC_BUTTON)).click()
 
     def get_name_in_history_changing(self):
         text = self.wait(self.driver).until(EC.visibility_of_element_located(self.GET_NAME_IN_HISROTY_CHANGING))
@@ -98,23 +109,31 @@ class GeographyPage(BasePage):
         text = self.wait(self.driver).until(EC.visibility_of_element_located(self.GET_DESCRIPTION_IN_HISTORY_CHANGING))
         return text.text
     def click_on_delete_button(self):
-        self.wait(self.driver).until(EC.visibility_of_element_located(self.DELETE_BUTTON)).click()
+        with allure.step('В правом фрейме нажать на кнопку "Удалить"'):
+            self.wait(self.driver).until(EC.visibility_of_element_located(self.DELETE_BUTTON)).click()
 
     def click_on_confirm_delete_button(self):
-        self.wait(self.driver).until(EC.visibility_of_element_located(self.CONFIRM_DELETE_BUTTON)).click()
+        with allure.step('В модальном окне нажать на кнопку "Удалить"'):
+            self.wait(self.driver).until(EC.visibility_of_element_located(self.CONFIRM_DELETE_BUTTON)).click()
 
     def get_text_information(self):
         text = self.wait(self.driver).until(EC.visibility_of_element_located(self.INFORMATION_MESSAGE))
         return text.text
 
     def click_on_checkbox_country(self):
-        self.wait(self.driver).until(EC.visibility_of_element_located(self.CHECKBOX_COUNTRY)).click()
+        with allure.step('В модальном выбрать страну'):
+            self.wait(self.driver).until(EC.visibility_of_element_located(self.CHECKBOX_COUNTRY)).click()
 
     def click_on_drop_down_modal(self):
-        self.wait(self.driver).until(EC.visibility_of_element_located(self.DROP_DOWN_MODAL)).click()
+        with allure.step('В модальном окне нажать на дроп даун рядом рядом с интересующим нас континентом'):
+            self.wait(self.driver).until(EC.visibility_of_element_located(self.DROP_DOWN_MODAL)).click()
 
     def input_modal_fast_search(self):
         return self.wait(self.driver).until(EC.visibility_of_element_located(self.MODAL_FAST_SEARCH))
     def get_text_continent(self):
         text = self.wait(self.driver).until(EC.visibility_of_element_located(self.GET_TEXT_COUNTRY))
         return text.text
+
+    def click_on_confirm_cancel_button(self):
+        with allure.step('В модальном окне нажать на кнопку "Отменить изменения"'):
+            self.wait(self.driver).until(EC.visibility_of_element_located(self.CONFIRM_CANCEL_BUTTON)).click()
