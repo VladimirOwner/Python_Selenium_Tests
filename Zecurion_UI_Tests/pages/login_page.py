@@ -22,7 +22,6 @@ class LoginPage(BasePage):
                         url = url[1].strip()
                 self.driver.get(f'http://{url}:1297')
 
-
     def user_field(self): # Получение элемента поля "Пользователь"
         return self.wait(self.driver).until(EC.visibility_of_element_located(self.USER_FIELD))
 
