@@ -19,8 +19,8 @@ class LoginPage(BasePage):
                 for line in f:
                     if line.__contains__('NGFW_STAND'):
                         url = line.split('=')
-                        url = url[1]
-                self.driver.get(url)
+                        url = url[1].strip()
+                self.driver.get(f'http://{url}:1297')
 
     def user_field(self): # Получение элемента поля "Пользователь"
         return self.wait(self.driver).until(EC.visibility_of_element_located(self.USER_FIELD))
