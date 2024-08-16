@@ -1,6 +1,7 @@
 from pages.base_page import BasePage
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver import ActionChains
+import allure
 
 class Hipprofiles(BasePage):
     def __init__(self,driver):
@@ -30,13 +31,16 @@ class Hipprofiles(BasePage):
     NO_ROWS_OVERLAY = ('xpath', '//span[text()=\'По вашему запросу ничего не найдено, попробуйте изменить условия поиска.\']')
 
     def object_button(self):
-        return self.wait(self.driver).until(EC.visibility_of_element_located(self.OBJECT_BUTTON))
+        with allure.step('Нажать на раздел "Объекты"'):
+            return self.wait(self.driver).until(EC.visibility_of_element_located(self.OBJECT_BUTTON))
 
     def hip_profiles_button(self):
-        return self.wait(self.driver).until(EC.visibility_of_element_located(self.HIP_PROFILES_BUTTON))
+        with allure.step('В левом фрейме нажать на раздел "HIP-профили"'):
+            return self.wait(self.driver).until(EC.visibility_of_element_located(self.HIP_PROFILES_BUTTON))
 
     def add_new_object(self):
-        return self.wait(self.driver).until(EC.visibility_of_element_located(self.ADD_NEW_OBJECT))
+        with allure.step('Нажать на кнопку создания нового объекта'):
+            return self.wait(self.driver).until(EC.visibility_of_element_located(self.ADD_NEW_OBJECT))
 
     def os_field(self):
         return self.wait(self.driver).until(EC.visibility_of_element_located(self.OS_FIELD))
@@ -45,7 +49,8 @@ class Hipprofiles(BasePage):
         return self.wait(self.driver).until(EC.visibility_of_element_located(self.BROWSER_FIELD))
 
     def save_button(self):
-        return self.wait(self.driver).until(EC.visibility_of_element_located(self.SAVE_BUTTON))
+        with allure.step('Нажать на кнопку "Сохранить" объект'):
+            return self.wait(self.driver).until(EC.visibility_of_element_located(self.SAVE_BUTTON))
 
     def fast_search(self):
         return self.wait(self.driver).until(EC.visibility_of_element_located(self.FAST_SEARCH))
@@ -58,13 +63,15 @@ class Hipprofiles(BasePage):
         return self.wait(self.driver).until(EC.visibility_of_element_located(self.GET_NAME_OBJECT))
 
     def pencil_edit_icon(self):
-        return self.wait(self.driver).until(EC.visibility_of_element_located(self.PENCIL_EDIT_ICON))
+        with allure.step('Нажать на иконку редактирования имени объекта'):
+            return self.wait(self.driver).until(EC.visibility_of_element_located(self.PENCIL_EDIT_ICON))
 
     def edit_name_object(self):
         return self.wait(self.driver).until(EC.visibility_of_element_located(self.EDIT_NAME_OBJECT))
 
     def get_author(self):
-        return self.wait(self.driver).until(EC.visibility_of_element_located(self.AUTHOR_OF_CHANGE))
+        with allure.step('(Заглушка) Получение имени автора изменения'):
+            return self.wait(self.driver).until(EC.visibility_of_element_located(self.AUTHOR_OF_CHANGE))
     def get_object(self):
         list = self.wait(self.driver).until(EC.visibility_of_all_elements_located(self.LIST_OBJECTS_IN_MAIN_FRAME))
         return list[-1]
@@ -73,10 +80,12 @@ class Hipprofiles(BasePage):
         return self.wait(self.driver).until(EC.visibility_of_element_located(self.DESCRIPTION_FIELD))
 
     def statistics(self):
-        return self.wait(self.driver).until(EC.visibility_of_element_located(self.RIGHT_FRAME_STATISTICS))
+        with allure.step('Открыть вкладку Статистика'):
+            return self.wait(self.driver).until(EC.visibility_of_element_located(self.RIGHT_FRAME_STATISTICS))
 
     def last_change(self):
-        return self.wait(self.driver).until(EC.visibility_of_element_located(self.LAST_CHANGE))
+        with allure.step('Открыть последнее изменение объекта'):
+            return self.wait(self.driver).until(EC.visibility_of_element_located(self.LAST_CHANGE))
 
     def get_description(self):
         text = self.wait(self.driver).until(EC.visibility_of_element_located(self.GET_DESCRIPTION))
@@ -91,13 +100,16 @@ class Hipprofiles(BasePage):
         return text.text
 
     def close_err_window(self):
-        return self.wait(self.driver).until(EC.visibility_of_element_located(self.CLOSE_ERR_WINDOW))
+        with allure.step('Закрыть модальное окно ошибки'):
+            return self.wait(self.driver).until(EC.visibility_of_element_located(self.CLOSE_ERR_WINDOW))
 
     def delete_object(self):
-        return self.wait(self.driver).until(EC.visibility_of_element_located(self.DELETE_OBJECT))
+        with allure.step('Нажать на иконку "Удаление объекта"'):
+            return self.wait(self.driver).until(EC.visibility_of_element_located(self.DELETE_OBJECT))
 
     def accept_delete_object(self):
-        return self.wait(self.driver).until(EC.visibility_of_element_located(self.ACCEPT_DELETE_OBJECT))
+        with allure.step('Нажать на кнопку подтверждения "Удаления объекта"'):
+            return self.wait(self.driver).until(EC.visibility_of_element_located(self.ACCEPT_DELETE_OBJECT))
 
     def get_no_rows_overlay(self):
         text = self.wait(self.driver).until(EC.visibility_of_element_located(self.NO_ROWS_OVERLAY))
