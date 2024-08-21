@@ -420,8 +420,16 @@ def test_delete_tacacs_object(driver):
 @allure.title('Создание объекта "DC Log"')
 @allure.description('Для прохождения данного теста необходимо наличие на локальном компьютере валидного сертификата и ключа')
 def test_create_dc_log(driver):
-    path_cert = 'C:/Users/salynin/Downloads/CertsNew.cer'
-    path_key = 'C:/Users/salynin/Downloads/CertsNew.key'
+    with open('creds.txt', 'r') as f:
+        for line in f:
+            if line.__contains__('CERT'):
+                cert = line.split('=')
+                cert = cert[-1].strip()
+            elif line.__contains__('KEY'):
+                key = line.split('=')
+                key = key[-1].strip()
+    path_cert = cert
+    path_key = key
     login_page = LoginPage(driver)
     authorization_page = AuthorizationPage(driver)
     login_page.login()
@@ -456,8 +464,16 @@ def test_create_dc_log(driver):
 @allure.title('Создание объекта "DC Log" с невалидным сертификатом')
 @allure.description('Для прохождения данного теста необходимо наличие на локальном компьютере невалидного сертификата и валидного ключа')
 def test_create_object_invalid_sert(driver):
-    path_cert = 'C:/Users/salynin/Downloads/SSL.cer'
-    path_key = 'C:/Users/salynin/Downloads/CertsNew.key'
+    with open('creds.txt', 'r') as f:
+        for line in f:
+            if line.__contains__('INVALID'):
+                cert = line.split('=')
+                cert = cert[-1].strip()
+            elif line.__contains__('KEY'):
+                key = line.split('=')
+                key = key[-1].strip()
+    path_cert = cert
+    path_key = key
     login_page = LoginPage(driver)
     authorization_page = AuthorizationPage(driver)
     login_page.login()
@@ -491,8 +507,16 @@ def test_create_object_invalid_sert(driver):
 @allure.story("Параметры авторизации - DC Log")
 @allure.title('Создание объекта без одного заполненного обязательного поля')
 def test_obligatory_to_fill_port(driver):
-    path_cert = 'C:/Users/salynin/Downloads/CertsNew.cer'
-    path_key = 'C:/Users/salynin/Downloads/CertsNew.key'
+    with open('creds.txt', 'r') as f:
+        for line in f:
+            if line.__contains__('CERT'):
+                cert = line.split('=')
+                cert = cert[-1].strip()
+            elif line.__contains__('KEY'):
+                key = line.split('=')
+                key = key[-1].strip()
+    path_cert = cert
+    path_key = key
     login_page = LoginPage(driver)
     authorization_page = AuthorizationPage(driver)
     login_page.login()
