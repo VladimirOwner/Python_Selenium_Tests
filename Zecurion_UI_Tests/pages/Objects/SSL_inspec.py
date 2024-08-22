@@ -44,6 +44,8 @@ class SslInspec(BasePage):
     SELECT_TEG = ('xpath', '//div[@class="modal-content"]/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[3]/div/div/div[2]/div/div/div')
     ACCEPT_TEG = ('xpath', '//button[@class="btn btn-no-variant b-button btn-no-variant b-modal__button b-button_primary"]/span[text()=" Применить "]')
     DEL_TEG = ('xpath', '//div[@class="b-tags__items"]/span/i')
+    TEG_INFO = ('xpath', '//div[@class="b-tags__items"]/span/b/span[text()=" Новый тег "]')
+    TEG_INFO_DEL = ('xpath', '//div[@class="b-badge-list b-badge-list_flex"]/span[text()=" Не установлено "]')
     def object_button(self):
         with allure.step('Нажать на раздел "Объекты"'):
             return self.wait(self.driver).until(ec.visibility_of_element_located(self.OBJECT_BUTTON))
@@ -187,3 +189,11 @@ class SslInspec(BasePage):
     def del_teg(self):
         with allure.step('Удаление тега у объекта'):
             self.wait(self.driver).until(ec.visibility_of_element_located(self.DEL_TEG)).click()
+
+    def get_teg_info(self):
+        text = self.wait(self.driver).until(ec.visibility_of_element_located(self.TEG_INFO))
+        return text.text
+
+    def get_teg_info_del(self):
+        text = self.wait(self.driver).until(ec.visibility_of_element_located(self.TEG_INFO_DEL))
+        return text.text

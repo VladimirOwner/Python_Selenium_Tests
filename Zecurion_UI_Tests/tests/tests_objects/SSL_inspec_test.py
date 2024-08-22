@@ -1,15 +1,21 @@
+from selenium import webdriver
 from pages.login_page import LoginPage
 from pages.Objects.SSL_inspec import SslInspec
-from test_tegs import test_create_teg, test_delete_teg
+from test_tegs import test_create_teg as create_teg, test_delete_teg as del_teg
 import allure
 
 
+def login(driver):
+    login_page = LoginPage(driver)
+    login_page.login()
+
+
 @allure.feature("Объекты")
-@allure.story("SSL-верификация")
+@allure.story("SSL-инспекция")
 @allure.title('Создание объекта')
 def test_create_ssl(driver):
     app_page = SslInspec(driver)
-    test_create_teg(driver)
+    create_teg(driver)
     app_page.object_button().click()
     app_page.ssl_button().click()
     app_page.add_new_object().click()
@@ -24,22 +30,21 @@ def test_create_ssl(driver):
 
 
 @allure.feature("Объекты")
-@allure.story("SSL-верификация")
+@allure.story("SSL-инспекция")
 @allure.title('Редактирование названия и описания')
 def test_edit(driver):
-    login_page = LoginPage(driver)
+    login(driver)
     app_page = SslInspec(driver)
-    login_page.login()
     app_page.object_button().click()
     app_page.ssl_button().click()
     app_page.select_object().click()
     app_page.click_on_pencil_button()
-    with allure.step('Изменить название тега, например "123"'):
+    with allure.step('Изменить название объекта, например "123"'):
         app_page.input_pencil().send_keys('123')
     app_page.save_button().click()
     with allure.step('Проверка изменения названия на новое'):
         assert app_page.get_new_object() == '123'
-    with allure.step('В поле описание ввести "Telegram"'):
+    with allure.step('В поле описание ввести "123"'):
         app_page.description_field().send_keys('123')
         app_page.save_button().click()
     with allure.step('Проверка добавления описания в объект'):
@@ -47,12 +52,11 @@ def test_edit(driver):
 
 
 @allure.feature("Объекты")
-@allure.story("SSL-верификация")
+@allure.story("SSL-инспекция")
 @allure.title('Редактирование типа')
 def test_dropdown(driver):
-    login_page = LoginPage(driver)
+    login(driver)
     app_page = SslInspec(driver)
-    login_page.login()
     app_page.object_button().click()
     app_page.ssl_button().click()
     app_page.select_object().click()
@@ -66,30 +70,28 @@ def test_dropdown(driver):
 
 
 @allure.feature("Объекты")
-@allure.story("SSL-верификация")
-@allure.title('Select checkbox')
+@allure.story("SSL-инспекция")
+@allure.title('Изменение чекбоксов')
 def test_checkbox(driver):
-    login_page = LoginPage(driver)
+    login(driver)
     app_page = SslInspec(driver)
-    login_page.login()
     app_page.object_button().click()
     app_page.ssl_button().click()
     app_page.select_object().click()
-    with allure.step('Select общий приватный ключ'):
+    with allure.step('Выбрать общий приватный ключ'):
         app_page.select_checkbox1().click()
         app_page.save_button().click()
-    with allure.step('Select Поддерживать технологии Cloudflare'):
+    with allure.step('Выбрать Поддерживать технологии Cloudflare'):
         app_page.select_checkbox2().click()
         app_page.save_button().click()
 
 
 @allure.feature("Объекты")
-@allure.story("SSL-верификация")
+@allure.story("SSL-инспекция")
 @allure.title('Изменение активности')
 def test_activity(driver):
-    login_page = LoginPage(driver)
+    login(driver)
     app_page = SslInspec(driver)
-    login_page.login()
     app_page.object_button().click()
     app_page.ssl_button().click()
     app_page.select_object().click()
@@ -100,12 +102,11 @@ def test_activity(driver):
 
 
 @allure.feature("Объекты")
-@allure.story("SSL-верификация")
+@allure.story("SSL-инспекция")
 @allure.title('Проверка записи в "Истории изменений"')
 def test_history_button(driver):
-    login_page = LoginPage(driver)
+    login(driver)
     app_page = SslInspec(driver)
-    login_page.login()
     app_page.object_button().click()
     app_page.ssl_button().click()
     app_page.select_object().click()
@@ -118,12 +119,11 @@ def test_history_button(driver):
 
 
 @allure.feature("Объекты")
-@allure.story("SSL-верификация")
+@allure.story("SSL-инспекция")
 @allure.title('Отмена изменений')
 def test_cancel_change(driver):
-    login_page = LoginPage(driver)
+    login(driver)
     app_page = SslInspec(driver)
-    login_page.login()
     app_page.object_button().click()
     app_page.ssl_button().click()
     app_page.select_object().click()
@@ -137,12 +137,11 @@ def test_cancel_change(driver):
 
 
 @allure.feature("Объекты")
-@allure.story("Теги")
+@allure.story("SSL-инспекция")
 @allure.title('Скачивание сертификата')
 def test_download(driver):
-    login_page = LoginPage(driver)
+    login(driver)
     app_page = SslInspec(driver)
-    login_page.login()
     app_page.object_button().click()
     app_page.ssl_button().click()
     app_page.select_object().click()
@@ -156,9 +155,8 @@ def test_download(driver):
 @allure.story("SSL-инспекция")
 @allure.title('Добавление тега')
 def test_ssl_addteg(driver):
-    login_page = LoginPage(driver)
+    login(driver)
     app_page = SslInspec(driver)
-    login_page.login()
     app_page.object_button().click()
     app_page.ssl_button().click()
     app_page.select_object().click()
@@ -168,34 +166,34 @@ def test_ssl_addteg(driver):
         app_page.select_teg()
         app_page.accept_teg()
         app_page.save_button().click()
+    with allure.step('Проверка добавления тега'):
+        assert app_page.get_teg_info() == 'Новый тег'
 
 
 @allure.feature("Объекты")
 @allure.story("SSL-инспекция")
-@allure.title('Добавление тега')
+@allure.title('Удаление тега')
 def test_ssl_delteg(driver):
-    login_page = LoginPage(driver)
+    login(driver)
     app_page = SslInspec(driver)
-    login_page.login()
     app_page.object_button().click()
     app_page.ssl_button().click()
     app_page.select_object().click()
     with allure.step('Нажать на "x" в строке Теги'):
         app_page.del_teg()
         app_page.save_button().click()
-
+    with allure.step('Проверка удаления тега'):
+        assert app_page.get_teg_info_del() == 'Не установлено'
 
 
 @allure.feature("Объекты")
-@allure.story("Теги")
+@allure.story("SSL-инспекция")
 @allure.title('Удаление объекта')
 def test_delete_ssl(driver):
-    test_delete_teg(driver)
+    del_teg(driver)
     app_page = SslInspec(driver)
     app_page.object_button().click()
     app_page.ssl_button().click()
     app_page.select_object().click()
     app_page.click_on_delete_button()
     app_page.click_on_confirm_delete_button()
-
-
