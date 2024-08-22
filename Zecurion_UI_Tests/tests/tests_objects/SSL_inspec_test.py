@@ -1,4 +1,4 @@
-from selenium import webdriver
+import time
 from pages.login_page import LoginPage
 from pages.Objects.SSL_inspec import SslInspec
 from test_tegs import test_create_teg as create_teg, test_delete_teg as del_teg
@@ -147,8 +147,10 @@ def test_download(driver):
     app_page.select_object().click()
     with allure.step('Скачать сертификат'):
         app_page.download_certif().click()
-    with allure.step('Скачать сертификат'):
+    time.sleep(2)
+    with allure.step('Скачать ключ'):
         app_page.download_key().click()
+    time.sleep(2)
 
 
 @allure.feature("Объекты")
