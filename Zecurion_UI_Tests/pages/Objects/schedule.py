@@ -73,7 +73,7 @@ class Schedule(BasePage):
     def add_new_object(self):
         return self.wait(self.driver).until(ec.visibility_of_element_located(self.ADD_NEW_OBJECT))
 
-    def object(self):
+    def open_object(self):
         list = self.wait(self.driver).until(ec.visibility_of_all_elements_located(self.LIST_OBJECT_DB))
         return list[-1]
 
