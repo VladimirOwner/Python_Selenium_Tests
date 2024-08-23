@@ -13,7 +13,7 @@ class SslInspec(BasePage):
     SAVE_BUTTON = ('xpath', '//span[text()=\' Сохранить \']/..')
     GET_OBJECT = ('xpath', '//span[text()=" Новая SSL-инспекция "]')
     GET_NEW_OBJECT = ('xpath', '//span[text()=" 123 "]')
-    LIST_OBJECT_APP = ('xpath', '//div[@class=\'ag-row-odd ag-row-no-focus ag-row-not-inline-editing ag-row ag-row-level-0 ag-row-position-absolute ag-row-last\']/div[1]/span/span')
+    LIST_OBJECT_APP = ('xpath', '//div[@class="ag-center-cols-container"]/div/div/span/span[text()]')
     GENERATE_SSL = ('xpath', '//span[text()=\' Сгенерировать \']')
     INPUT_SSL_NAME = ('xpath', '//input[@placeholder=\'Введите имя сертификата\']')
     GENERATE_BUTTON = ('xpath', '//div[@class=\'modal-content\']/footer[@class]/div[@class]/button')
@@ -23,8 +23,8 @@ class SslInspec(BasePage):
     PENCIL_BUTTON = ('xpath', '//span[@class=\'c-pencil-edit__icon\']')
     INPUT_PENCIL_FIELD = ('xpath', '//div[@class=\'form-group b-form-input\']//div[@class=\'b-form-input__container\']/input[@placeholder=\'Введите имя\']')
     DESCRIPTOIN_FIELD = ('xpath', '//input[@placeholder=\'Введите описание\']')
-    GET_DESCRIPTION_ON_MAIN_FRAME = ('xpath', '//div[@class="ag-row-odd ag-row-not-inline-editing ag-row ag-row-level-0 ag-row-position-absolute ag-row-last ag-row-focus active"]/div[4]')
-    GET_DROPDOWN_ON_MAIN_FRAME = ('xpath', '//div[@class="ag-row-odd ag-row-not-inline-editing ag-row ag-row-level-0 ag-row-position-absolute ag-row-last ag-row-focus active"]/div[3]')
+    GET_DESCRIPTION_ON_MAIN_FRAME = ('xpath', '//div[@class="ag-cell-value ag-cell ag-cell-not-inline-editing ag-cell-normal-height ag-cell-focus"]')
+    GET_DROPDOWN_ON_MAIN_FRAME = ('xpath', '//span[text()="ГОСТ"]')
     DROPDOWN_BUTTON = ('xpath', '//div[@class="c-dropdown-new c-select__dropdown"]')
     DROPDOWN_SELECT = ('xpath', '//div[@class="c-select__wrapper c-dropdown-new__item text-truncate"]/span')
     SELECT_CHECKBOX1 = ('xpath', '//div[@class=\'b-objects-detail-sslinspection h-100\']/label[1]/i')
@@ -46,6 +46,8 @@ class SslInspec(BasePage):
     DEL_TEG = ('xpath', '//div[@class="b-tags__items"]/span/i')
     TEG_INFO = ('xpath', '//div[@class="b-tags__items"]/span/b/span[text()=" Новый тег "]')
     TEG_INFO_DEL = ('xpath', '//div[@class="b-badge-list b-badge-list_flex"]/span[text()=" Не установлено "]')
+    GET_INFO_DEL = ('xpath', '//*[@id="z-main-content"]/div[1]/div/div[3]/main/div/div/div[2]/div/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[7]/div/div/div/span')
+
     def object_button(self):
         with allure.step('Нажать на раздел "Объекты"'):
             return self.wait(self.driver).until(ec.visibility_of_element_located(self.OBJECT_BUTTON))
@@ -196,4 +198,8 @@ class SslInspec(BasePage):
 
     def get_teg_info_del(self):
         text = self.wait(self.driver).until(ec.visibility_of_element_located(self.TEG_INFO_DEL))
+        return text.text
+
+    def get_info_del(self):
+        text = self.wait(self.driver).until(ec.visibility_of_element_located(self.GET_INFO_DEL))
         return text.text

@@ -199,3 +199,5 @@ def test_delete_ssl(driver):
     app_page.select_object().click()
     app_page.click_on_delete_button()
     app_page.click_on_confirm_delete_button()
+    with allure.step('Проверка удаления объекта'):
+        assert app_page.get_info_del() == 'По вашему запросу ничего не найдено, попробуйте изменить условия поиска.'
