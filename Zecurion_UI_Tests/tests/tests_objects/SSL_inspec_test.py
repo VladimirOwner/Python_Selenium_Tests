@@ -166,10 +166,11 @@ def test_ssl_addteg(driver):
         app_page.add_teg()
     with allure.step('В модальном окне выбрать тег и применить его'):
         app_page.select_teg()
+        name_teg = app_page.get_teg_name()
         app_page.accept_teg()
         app_page.save_button().click()
     with allure.step('Проверка добавления тега'):
-        assert app_page.get_teg_info() == 'Новый тег'
+        assert app_page.get_teg_info() == name_teg
 
 
 @allure.feature("Объекты")

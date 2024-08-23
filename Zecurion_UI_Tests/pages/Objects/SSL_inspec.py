@@ -42,9 +42,10 @@ class SslInspec(BasePage):
     CANCEL_BUTTON = ('xpath', '//span[text()=\' Отменить \']/..')
     ADD_TEG = ('xpath', '//div[@class="b-badge-list__header"]/button')
     SELECT_TEG = ('xpath', '//div[@class="modal-content"]/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[3]/div/div/div[2]/div/div/div')
-    ACCEPT_TEG = ('xpath', '//button[@class="btn btn-no-variant b-button btn-no-variant b-modal__button b-button_primary"]/span[text()=" Применить "]')
+    GET_TEG_NAME = ('xpath', '//footer[@class="modal-footer"]/..//div[@class="ag-center-cols-container"]/div[last()]/div[@col-id="name"]/span')
+    ACCEPT_TEG = ('xpath', '//button[@class="btn btn-no-variant b-button btn-no-variant b-modal__button b-button_primary"]/span[text()]')
     DEL_TEG = ('xpath', '//div[@class="b-tags__items"]/span/i')
-    TEG_INFO = ('xpath', '//div[@class="b-tags__items"]/span/b/span[text()=" Новый тег "]')
+    TEG_INFO = ('xpath', '//span[@class="b-tag"]/b/span')
     TEG_INFO_DEL = ('xpath', '//div[@class="b-badge-list b-badge-list_flex"]/span[text()=" Не установлено "]')
     GET_INFO_DEL = ('xpath', '//*[@id="z-main-content"]/div[1]/div/div[3]/main/div/div/div[2]/div/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[7]/div/div/div/span')
 
@@ -202,4 +203,8 @@ class SslInspec(BasePage):
 
     def get_info_del(self):
         text = self.wait(self.driver).until(ec.visibility_of_element_located(self.GET_INFO_DEL))
+        return text.text
+
+    def get_teg_name(self):
+        text = self.wait(self.driver).until(ec.visibility_of_element_located(self.GET_TEG_NAME))
         return text.text
