@@ -111,9 +111,9 @@ def test_add_teg(driver):
     adblok.choose_object_in_main_frame().click()
     adblok.click_on_tegs_plus_button()
     adblok.choose_teg_in_modal()
+    name_tag = adblok.get_name_tag_in_modal()
     adblok.click_on_apply_button()
     adblok.click_on_save_button()
-    name_tag = adblok.get_tag_on_main_frame()
     adblok.click_on_statistic_button()
     adblok.click_on_history_button()
     assert adblok.get_history_teg() == name_tag
