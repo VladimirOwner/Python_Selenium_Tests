@@ -1,6 +1,7 @@
 from pages.login_page import LoginPage
 from pages.Objects.tegs import Tegs
 import allure
+from faker import Faker
 
 
 def login(driver):
@@ -12,6 +13,8 @@ def login(driver):
 @allure.story("Теги")
 @allure.title('Создание объекта')
 def test_create_teg(driver):
+    fake = Faker("ru_RU")
+    name = fake.word()
     login(driver)
     app_page = Tegs(driver)
     app_page.object_button().click()
@@ -20,28 +23,30 @@ def test_create_teg(driver):
     app_page.save_button().click()
     with allure.step('Проверка создания объекта'):
         assert app_page.get_name_object() == 'Новый тег'
+    with allure.step('Изменить название тега'):
+        app_page.click_on_pencil_button()
+        app_page.input_pencil().send_keys(name)
+    app_page.save_button().click()
+    with allure.step('Проверка изменения названия на новое'):
+        assert app_page.get_name_object() == name
 
 
 @allure.feature("Объекты")
 @allure.story("Теги")
 @allure.title('Изменение объекта')
 def test_change_name_object(driver):
+    fake = Faker("ru_RU")
+    name = fake.word()
     login(driver)
     app_page = Tegs(driver)
     app_page.object_button().click()
     app_page.tegs_button().click()
     app_page.get_object().click()
-    app_page.click_on_pencil_button()
-    with allure.step('Изменить название тега, например "123"'):
-        app_page.input_pencil().send_keys('123')
-    app_page.save_button().click()
-    with allure.step('Проверка изменения названия на новое'):
-        assert app_page.get_name_object() == '123'
-    with allure.step('В поле описание ввести "Telegram"'):
-        app_page.description_field().send_keys('Telegram')
+    with allure.step('В поле описание ввести '):
+        app_page.description_field().send_keys(name)
         app_page.save_button().click()
     with allure.step('Проверка добавления описания в объект'):
-        assert app_page.get_description_on_main_frame() == 'Telegram'
+        assert app_page.get_description_on_main_frame() == name
     with allure.step('Unselect checkbox'):
         app_page.unselect_checkbox().click()
         app_page.save_button().click()

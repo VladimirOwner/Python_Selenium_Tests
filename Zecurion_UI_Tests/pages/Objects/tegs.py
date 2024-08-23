@@ -22,7 +22,7 @@ class Tegs(BasePage):
     CHECKBOX = ('xpath', '//span[text()=\'Отображать название\']')
     DELETE_BUTTON = ('xpath', '//i[@class=\'b-frame-detail__footer-delete far fa-trash-alt\']')
     CONFIRM_DELETE_BUTTON = ('xpath', '//button/span[text()=\' Удалить \']')
-    INFORMATION_MESSAGE = ('xpath', '//div[@class=\'b-frame-main__container b-frame-main__container_empty\']//span[text()]')
+    INFORMATION_MESSAGE = ('xpath', '//*[@id="z-main-content"]/div[1]/div/div[3]/main/div/div/div[2]/div/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[7]/div/div/div/span')
     STATISTIC_BUTTON = ('xpath', '//li/a[text()=\'Статистика\']')
     HISTORY_BUTTON = ('xpath', '//button[@class=\'b-frame-detail__history-date b-button btn-link\']')
     HISTORY_CHANGING_NAME = ('xpath', '//div[@class=\'b-change-modal__content b-change-modal__content_one-block\']/div[1]//div[@class=\'b-change-modal__item--value text-truncate\']/span')
