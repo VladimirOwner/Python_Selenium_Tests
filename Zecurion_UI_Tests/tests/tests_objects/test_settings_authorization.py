@@ -253,7 +253,6 @@ def test_input_time_session(creds,driver):
         authorization_page.click_on_save_button()
         with allure.step('Проверка появления модального окна с ошибкой введенного значения'):
             assert authorization_page.get_text_obligatory_fill() == 'Срок сессии, мин - Число должно быть целым и больше или равно 5'
-
     elif time == '1440':
         authorization_page.input_time_session().clear()
         with allure.step('В поле "Срок сессии,мин" ввести значение "1440"'):
