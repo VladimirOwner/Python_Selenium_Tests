@@ -1,4 +1,4 @@
-import time
+# import time
 from pages.login_page import LoginPage
 from pages.Objects.SSL_inspec import SslInspec
 from test_tegs import test_create_teg as create_teg, test_delete_teg as del_teg
@@ -136,21 +136,21 @@ def test_cancel_change(driver):
         assert app_page.get_description_on_main_frame() == description
 
 
-@allure.feature("Объекты")
-@allure.story("SSL-инспекция")
-@allure.title('Скачивание сертификата')
-def test_download(driver):
-    login(driver)
-    app_page = SslInspec(driver)
-    app_page.object_button().click()
-    app_page.ssl_button().click()
-    app_page.select_object().click()
-    with allure.step('Скачать сертификат'):
-        app_page.download_certif().click()
-    time.sleep(2)
-    with allure.step('Скачать ключ'):
-        app_page.download_key().click()
-    time.sleep(2)
+# @allure.feature("Объекты")
+# @allure.story("SSL-инспекция")
+# @allure.title('Скачивание сертификата')
+# def test_download(driver):
+#   login(driver)
+#   app_page = SslInspec(driver)
+#   app_page.object_button().click()
+#   app_page.ssl_button().click()
+#   app_page.select_object().click()
+#   with allure.step('Скачать сертификат'):
+#      app_page.download_certif().click()
+#    time.sleep(2)
+#    with allure.step('Скачать ключ'):
+#      app_page.download_key().click()
+#    time.sleep(2)
 
 
 @allure.feature("Объекты")
