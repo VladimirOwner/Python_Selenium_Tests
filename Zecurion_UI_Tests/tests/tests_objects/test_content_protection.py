@@ -2,6 +2,7 @@ import time
 import pytest
 from pages.login_page import LoginPage
 from pages.Objects.content_protection import ContentProtection
+from test_tegs import test_create_teg as create_teg, test_delete_teg as del_teg
 import allure
 
 
@@ -41,6 +42,21 @@ def test_add_description(driver):
     protection.input_description().send_keys('Защита паспортных данных')
     protection.click_on_save_button()
     assert protection.get_description_on_main_frame() == 'Защита паспортных данных'
+
+def test_add_tag(driver):
+    create_teg(driver)
+    protection = ContentProtection(driver)
+    protection.click_on_object_button()
+    protection.click_on_protection_button()
+    protection.choose_object_in_main_frame().click()
+    protection.click_on_tegs_plus_button()
+    protection.choose_teg_in_modal()
+    name_tag = protection.get_name_tag_in_modal()
+    protection.click_on_apply_button()
+    protection.click_on_save_button()
+    assert protection.get_tag_on_main_frame() == name_tag
+
+
 
 
 def test_cancel_changing(driver):
@@ -138,6 +154,16 @@ def test_delete_input_mask(driver):
     protection.click_on_save_button()
     assert protection.get_count_mask() == count-1
 
+def test_delete_tag(driver):
+    login(driver)
+    protection = ContentProtection(driver)
+    protection.click_on_object_button()
+    protection.click_on_protection_button()
+    protection.choose_object_in_main_frame().click()
+    protection.click_on_delete_tag()
+    protection.click_on_save_button()
+    assert protection.get_text_none_tag() == 'Не установлено'
+
 
 def test_choose_all_checkbox(driver):
     login(driver)
@@ -163,7 +189,7 @@ def test_choose_all_checkbox(driver):
 
 
 def test_delete_content_protection(driver):
-    login(driver)
+    del_teg(driver)
     protection = ContentProtection(driver)
     protection.click_on_object_button()
     protection.click_on_protection_button()

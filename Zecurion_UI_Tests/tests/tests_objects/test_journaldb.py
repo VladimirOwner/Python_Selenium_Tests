@@ -1,8 +1,11 @@
+import time
 import pytest
 from pages.login_page import LoginPage
+from test_tegs import test_create_teg as create_teg, test_delete_teg as del_teg
 from pages.Objects.journal_db import JournalDB
 import allure
-
+from faker import Faker
+faker = Faker()
 
 def login(driver):
     login_page = LoginPage(driver)
@@ -67,6 +70,20 @@ def test_change_activity(driver):
     assert journal.get_history_activity() == 'Выключено'
 
 
+def test_add_tag(driver):
+    create_teg(driver)
+    journal = JournalDB(driver)
+    journal.click_on_object_button()
+    journal.click_on_journaldb_button()
+    journal.choose_object_in_main_frame().click()
+    journal.click_on_tegs_plus_button()
+    journal.choose_teg_in_modal()
+    name_tag = journal.get_name_tag_in_modal()
+    journal.click_on_apply_button()
+    journal.click_on_save_button()
+    assert journal.get_tag_on_main_frame() == name_tag
+
+
 def test_obligatory_to_fill_db(driver):
     login(driver)
     journal = JournalDB(driver)
@@ -129,6 +146,7 @@ def test_history_changing_information(driver):
     journal.click_on_journaldb_button()
     journal.choose_object_in_main_frame().click()
     db = journal.input_enter_db().get_attribute('value')
+    tag = journal.get_tag_on_main_frame()
     name = journal.get_name_object()
     description = journal.input_description().get_attribute('value')
     user = journal.input_user().get_attribute('value')
@@ -136,11 +154,22 @@ def test_history_changing_information(driver):
     journal.click_on_statistic_button()
     journal.click_on_history_button()
     assert journal.get_history_db() == db and journal.get_history_name() == name and \
-        journal.get_history_description() == description and journal.get_history_user() == user and journal.get_history_server() == server
+        journal.get_history_description() == description and journal.get_history_user() == user and journal.get_history_server() == server and \
+        journal.get_history_tag() == tag
+
+def test_delete_tag(driver):
+    login(driver)
+    journal = JournalDB(driver)
+    journal.click_on_object_button()
+    journal.click_on_journaldb_button()
+    journal.choose_object_in_main_frame().click()
+    journal.click_on_delete_tag()
+    journal.click_on_save_button()
+    assert journal.get_text_none_tag() == 'Не установлено'
 
 
 def test_delete_db(driver):
-    login(driver)
+    del_teg(driver)
     journal = JournalDB(driver)
     journal.click_on_object_button()
     journal.click_on_journaldb_button()
