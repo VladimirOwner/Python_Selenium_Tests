@@ -48,6 +48,15 @@ class JournalDB(BasePage):
     HISTORY_USER = ('xpath', '//div[@class=\'b-change-modal__content b-change-modal__content_one-block\']/div[5]//div[@class=\'b-change-modal__item--value text-truncate\']/span')
     HISTORY_SERVER = ('xpath', '//div[@class=\'b-change-modal__content b-change-modal__content_one-block\']/div[6]//div[@class=\'b-change-modal__item--value text-truncate\']/span')
     INFORMATION_MESSAGE = ('xpath', '//span[text()=\'По вашему запросу ничего не найдено, попробуйте изменить условия поиска.\']')
+    NAME_TAG_IN_MODAL = ('xpath', '//footer[@class=\'modal-footer\']/..//div[@class=\'ag-center-cols-container\']/div[last()]/div[@col-id=\'name\']')
+    TEGS_PLUS_BUTTON = ('xpath', '//div[text()=\' Теги \']/..//button')
+    TEG_IN_MODAL = ('xpath', '//footer[@class=\'modal-footer\']/..//div[@class=\'ag-center-cols-container\']/div[last()]')
+    APPLY_BUTTON = ('xpath', '//button[@class=\'btn btn-no-variant b-button btn-no-variant b-modal__button b-button_primary\']')
+    GET_TEG_ON_MAIN_FRAME = ('xpath', '//div[@class=\'ag-center-cols-clipper\']//div[@role=\'row\'][last()]//div[@col-id=\'tags\']')
+    TEXT_NONE_TAG = ('xpath', '//span[@class=\'description d-block\']')
+    HISTORY_TEG_TEXT = ('xpath', '//div[@class=\'b-change-modal__content b-change-modal__content_one-block\']/div[7]//div[@class=\'b-change-modal__item--value text-truncate\']/span')
+    DELETE_TAG = ('xpath', '//i[@class=\'b-tag__delete z-font z-font-delete\']')
+
 
 
 
@@ -202,3 +211,30 @@ class JournalDB(BasePage):
         text = self.wait(self.driver).until(ec.visibility_of_element_located(self.INFORMATION_MESSAGE))
         return text.text
 
+    def click_on_tegs_plus_button(self):
+        self.wait(self.driver).until(ec.visibility_of_element_located(self.TEGS_PLUS_BUTTON)).click()
+
+    def choose_teg_in_modal(self):
+        self.wait(self.driver).until(ec.visibility_of_element_located(self.TEG_IN_MODAL)).click()
+
+    def click_on_apply_button(self):
+        self.wait(self.driver).until(ec.visibility_of_element_located(self.APPLY_BUTTON)).click()
+
+    def get_tag_on_main_frame(self):
+        text = self.wait(self.driver).until(ec.visibility_of_element_located(self.GET_TEG_ON_MAIN_FRAME))
+        return text.text
+
+    def get_name_tag_in_modal(self):
+        text = self.wait(self.driver).until(ec.visibility_of_element_located(self.NAME_TAG_IN_MODAL))
+        return text.text
+
+    def click_on_delete_tag(self):
+        self.wait(self.driver).until(ec.visibility_of_element_located(self.DELETE_TAG)).click()
+
+    def get_text_none_tag(self):
+        text = self.wait(self.driver).until(ec.visibility_of_element_located(self.TEXT_NONE_TAG))
+        return text.text
+
+    def get_history_tag(self):
+        text = self.wait(self.driver).until(ec.visibility_of_element_located(self.HISTORY_TEG_TEXT))
+        return text.text
